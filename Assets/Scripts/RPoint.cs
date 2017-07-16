@@ -71,6 +71,11 @@ public class RPoint
 
 
     #region  // 其他函数
+    /// <summary>
+    /// 向该地点添加一个类型
+    /// </summary>
+    /// <param name="_type">要添加的地点类型</param>
+    /// <returns>是否成功</returns>
     public Boolean AddType(RPointType _type)
     {
         if (_type > RPointType.RPT_OTHER) return false;
@@ -78,6 +83,11 @@ public class RPoint
         return true;
     }
 
+    /// <summary>
+    /// 移除该地点的一个类型  PS.目前用不到，除非后期允许玩家毁掉或者改造一个地点
+    /// </summary>
+    /// <param name="_type">要移除的地点类型</param>
+    /// <returns></returns>
     public Boolean RemoveType(RPointType _type)
     {
         if (_type > RPointType.RPT_OTHER) return false;
@@ -85,6 +95,12 @@ public class RPoint
 
         type ^= _type;
 
+        return true;
+    }
+
+    public Boolean Save()
+    {
+        // TODO:chenyufei 将当前的状态存入文件，后期可以保存玩家访问该地点时留下的一些数据
         return true;
     }
 
@@ -126,6 +142,8 @@ public class RPointFactory
     // 创建一个地图点
     public RPoint CreatePoint(Int64 _x, Int64 _y)
     {
+        idCount++;
+        Save();
         return new RPoint(++idCount, _x, _y);
     }
     #endregion

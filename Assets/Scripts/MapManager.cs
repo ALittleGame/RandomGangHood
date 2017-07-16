@@ -1,16 +1,51 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class MapManager : MonoBehaviour {
+public class MapManager
+{
+    private static readonly MapManager instance = new MapManager();
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private MapManager()
+    {
+        maps = new Dictionary<String, RMap>();
+    }
+
+    public static MapManager Instance()
+    {
+        return instance;
+    }
+
+    private Dictionary<String, RMap> maps;  // 所有地图，使用名称作为索引
+
+    /// <summary>
+    /// 添加一个地图，需要指定地图名称
+    /// </summary>
+    /// <param name="name">地图名称</param>
+    /// <param name="map">地图对象</param>
+    /// <returns>是否成功</returns>
+    public Boolean AddMap(String name, RMap map)
+    {
+        if (maps.ContainsKey(name)) return false;
+
+        maps.Add(name, map);
+
+        return true;
+    }
+
+    /// <summary>
+    /// 根据名称找到获取一个地图对象
+    /// </summary>
+    /// <param name="name">地图名称</param>
+    /// <returns>地图对象，不存在时返回null</returns>
+    public RMap GetMap(String name)
+    {
+        if (maps.ContainsKey(name) == false) return null;
+        return maps[name];
+    }
+
+    public Boolean Save()
+    {
+        // TODO:chenyufei 调用maps中所有地图的Save
+        return true;
+    }
 }

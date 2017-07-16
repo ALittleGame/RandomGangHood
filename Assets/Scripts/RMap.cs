@@ -13,7 +13,9 @@ public class RMap
         points = new RPoint[ySize, xSize];
     }
 
-    // 生成path数组
+    /// <summary>
+    /// 生成path数组
+    /// </summary>
     private void GenPath()
     {
         path = new int[,]
@@ -25,7 +27,9 @@ public class RMap
         };
     }
 
-    // 根据path数组，生成points数组
+    /// <summary>
+    /// 根据path数组，生成points数组
+    /// </summary>
     private void GenPoints()
     {
         int ySize = path.GetLength(0);
@@ -45,6 +49,12 @@ public class RMap
             }
         }
 
+    }
+
+    public Boolean Save()
+    {
+        // TODO:chenyufei 调用所有RPoint的Save
+        return true;
     }
 
     #region  // Get与Set方法
