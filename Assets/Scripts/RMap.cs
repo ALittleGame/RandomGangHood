@@ -1,13 +1,54 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using System;
+using System.Collections.Generic;
 
-public class RMap : ScriptableObject
+public class RMap
 {
-    private int[][]     path;   // 用于描述该地图地形和通路的矩阵
-    private RPoint[][]  points; // 用于记录具体每个点
+    private int[,]     path;   // 用于描述该地图地形和通路的矩阵
+    private RPoint[,]  points; // 用于记录具体每个点，与path对应
+
+    public RMap(int xSize, int ySize)
+    {
+        // TODO: path也在这里new
+
+        points = new RPoint[ySize, xSize];
+    }
+
+    // 生成path数组
+    private void GenPath()
+    {
+        path = new int[,]
+        {
+            { 0, 1, 0, 0, 0},
+            { 0, 1, 1, 1, 1},
+            { 1, 0, 1, 0, 0},
+            { 1, 1, 1, 0, 0}
+        };
+    }
+
+    // 根据path数组，生成points数组
+    private void GenPoints()
+    {
+        int ySize = path.GetLength(0);
+        int xSize = path.GetLength(1);
+
+        for(int y=0;y<ySize;y++)
+        {
+            for(int x=0;x<xSize;x++)
+            {
+                if(path[y,x] > 0)
+                {
+                    // TODO: 这里初始化的时候用一个与y,x有关的随机值传入CreatePoint，得到该点在地图上的坐标
+                    points[y, x] = RPointFactory.Instance().CreatePoint(0, 0);
+
+                    // TODO: 随机给这个点加上一些特性，例如门派、商店等
+                }
+            }
+        }
+
+    }
 
     #region  // Get与Set方法
-    public int[][] Path
+    public int[,] Path
     {
         get
         {

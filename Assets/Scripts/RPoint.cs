@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System;
+﻿using System;
 
 // 地点类型掩码
 public enum RPointType
