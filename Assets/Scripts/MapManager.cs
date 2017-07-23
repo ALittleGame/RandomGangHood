@@ -48,4 +48,14 @@ public class MapManager
         // TODO:chenyufei 调用maps中所有地图的Save
         return true;
     }
+
+    /// <summary>
+    /// 从存档文件中加载旧地图，并从配置文件中加载新加入的地图
+    /// </summary>
+    /// <returns></returns>
+    public Boolean Load()
+    {
+        // TODO: chenyufei 创建RMap对象，根据文件中的数据去初始化，并使用AddMap添加
+        return true;
+    }
 }
