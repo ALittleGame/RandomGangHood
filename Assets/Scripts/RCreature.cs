@@ -64,4 +64,16 @@ public class RCreature
         // 考虑一下飞如果pointId==0，飞到哪个默认点
         return true;
     }
+
+    /// <summary>
+    /// 访问当前所在的地图点（当表现层的人物移动到目标点的时候，由表现层发起调用）
+    /// </summary>
+    /// <returns></returns>
+    public Boolean VisitCurrentPoint()
+    {
+        // TODO: chenyufei 检查当前所在的地图点是什么类型
+
+        // 如果触发什么事件（遇到怪、有交易、有对话等等），则通知表现层打开对应面板
+        return true;
+    }
 }
