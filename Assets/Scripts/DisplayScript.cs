@@ -1,23 +1,19 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System;
-using UnityEngine;
+
 
 /// <summary>
 /// 表现层入口
 /// 用于逻辑层向表现层发出指令，要求表现层的物体执行某个动作
 /// </summary>
-public class DisplayScript : MonoBehaviour {
+public class DisplayScript {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private static readonly DisplayScript instance = new DisplayScript();
+
+    public static DisplayScript Instance()
+    {
+        return instance;
+    }
 
     /// <summary>
     /// 将某个生物的目标设定到某个地图点
@@ -33,5 +29,13 @@ public class DisplayScript : MonoBehaviour {
         // 最好在这个类中用一个map来存储每个id对应的GameObject引用
 
         // TODO: 该函数逻辑：找到指定点GameObject，取出坐标，找到指定生物GameObject，将移动目的地设置为指定坐标，生物对象会自己随着Update移动过去
+    }
+
+    /// <summary>
+    /// 逻辑层地图生成或加载完成后，要求表现层更新
+    /// </summary>
+    public void UpdateMap()
+    {
+
     }
 }

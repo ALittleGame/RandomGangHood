@@ -48,6 +48,10 @@ public class RCreature
     /// <returns></returns>
     public Boolean MoveToPoint(Int64 pointId)
     {
+        // TODO: chenyufei 一些其他逻辑
+
+        // 确定能成功移动后，通知表现层
+        DisplayScript.Instance().CreasureMove(this.id, pointId);
         return true;
     }
 

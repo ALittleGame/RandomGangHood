@@ -20,8 +20,8 @@ public class Interface_map : MonoBehaviour {
     {
 
     }
-#region
-    //对外接口
+    #region //对外接口
+
 
     //接收数据-对外接口
     public void setMap(int[,] arr, int rows, int columns)
@@ -55,8 +55,8 @@ public class Interface_map : MonoBehaviour {
     }
     #endregion
 
-#region
-    //私有接口
+    #region //私有接口
+
 
     //生成地图
     private void generateMap()
