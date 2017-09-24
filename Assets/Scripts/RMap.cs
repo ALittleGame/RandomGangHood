@@ -6,7 +6,8 @@ public class RMap
     private int[,]     path;   // 用于描述该地图地形和通路的矩阵
     private RPoint[,]  points; // 用于记录具体每个点，与path对应
 
-    public RMap(int xSize, int ySize)
+    
+public RMap(int xSize, int ySize)
     {
         // TODO: path也在这里new
 
@@ -68,6 +69,17 @@ public class RMap
         set
         {
             path = value;
+        }
+    }
+    public RPoint[,] Points
+    {
+        get
+        {
+            return points;
+        }
+        set
+        {
+            points = value;
         }
     }
     #endregion

@@ -11,55 +11,43 @@ public class Interface_map : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if(_dirty)
+        {
+            GenerateMap();
+            _dirty = false;
+        }
 	}
 
-    private int[,] _MapMatrix;
+    private RMap _MapMatrix;
+    private bool _dirty;
 
     public Interface_map()
     {
         _MapMatrix = null;
+        _dirty = false;
     }
+
     #region //对外接口
-
-
     //接收数据-对外接口
-    public void SetMap(int[,] arr)
+    public void SetMap(RMap map, bool dirty = false)
     {
-        int rows = arr.GetLength(0);
-        int columns = arr.GetLength(1);
-        if (_MapMatrix == null) _MapMatrix = new int[rows, columns];
+        int rows = map.Path.GetLength(0);
+        int columns = map.Path.GetLength(1);
+        if (_MapMatrix == null) _MapMatrix = new RMap(rows, columns);
         for (int rowIndex = 0; rowIndex < rows; ++rowIndex)
         {
             
             for (int columnIndex = 0; columnIndex < columns; ++columnIndex)
             {
-                _MapMatrix[rowIndex,columnIndex] = arr[rowIndex,columnIndex];
+                _MapMatrix.Points[rowIndex,columnIndex] = map.Points[rowIndex,columnIndex];
             }
         }
-        GenerateMap();
+        _dirty = dirty;
     }
     //清除地图-对外接口
     public void ClearMap()
     {
 
-    }
-
-    //更新地图-对外接口
-    public void UpdataMap(int[,] arr)
-    {
-        if (_MapMatrix == null) return;
-
-        int rows = arr.GetLength(0);
-        for (int rowIndex = 0; rowIndex < rows; ++rowIndex)
-        {
-            int columns = arr.GetLength(1);
-            for (int columnIndex = 0; columnIndex < columns; ++columnIndex)
-            {
-                _MapMatrix[rowIndex, columnIndex] = arr[rowIndex, columnIndex];
-            }
-        }
-        GenerateMap();
     }
     #endregion
 
@@ -71,8 +59,8 @@ public class Interface_map : MonoBehaviour {
     {
         if (_MapMatrix == null) return;
 
-        int rows = _MapMatrix.GetLength(0);
-        int columns = _MapMatrix.GetLength(1);
+        int rows = _MapMatrix.Path.GetLength(0);
+        int columns = _MapMatrix.Path.GetLength(1);
         //生成地图格子
         GenerateMapGrid(rows, columns);
         //对每个格子加载相应资源
@@ -80,7 +68,7 @@ public class Interface_map : MonoBehaviour {
         {
             for (int columnIndex = 0; columnIndex < columns; ++columnIndex)
             {
-                LoadMatOnGrid(_MapMatrix[rowIndex,columnIndex]);
+                LoadMatOnGrid(_MapMatrix.Points[rowIndex,columnIndex]);
             }
         }
     }
@@ -91,7 +79,7 @@ public class Interface_map : MonoBehaviour {
 
     }
     //加载网格子上加载资源-私有方法
-    private bool LoadMatOnGrid(int MatID)
+    private bool LoadMatOnGrid(RPoint point)
     {
         //从库中Find资源挂在到地图格子上
         return true;
