@@ -14,11 +14,11 @@ public class Interface_map : MonoBehaviour {
 		
 	}
 
-    private int[,] _MapMatrix;  // TODO: chenyufei 该对象需要初始化，否则会崩溃，可以考虑在构造函数或者Start或者某处获取二维的长度，然后new
+    private int[,] _MapMatrix;
 
     public Interface_map()
     {
-
+        _MapMatrix = null;
     }
     #region //对外接口
 
@@ -27,9 +27,11 @@ public class Interface_map : MonoBehaviour {
     public void SetMap(int[,] arr)
     {
         int rows = arr.GetLength(0);
+        int columns = arr.GetLength(1);
+        if (_MapMatrix == null) _MapMatrix = new int[rows, columns];
         for (int rowIndex = 0; rowIndex < rows; ++rowIndex)
         {
-            int columns = arr.GetLength(1);
+            
             for (int columnIndex = 0; columnIndex < columns; ++columnIndex)
             {
                 _MapMatrix[rowIndex,columnIndex] = arr[rowIndex,columnIndex];
@@ -46,6 +48,8 @@ public class Interface_map : MonoBehaviour {
     //更新地图-对外接口
     public void UpdataMap(int[,] arr)
     {
+        if (_MapMatrix == null) return;
+
         int rows = arr.GetLength(0);
         for (int rowIndex = 0; rowIndex < rows; ++rowIndex)
         {
@@ -65,6 +69,8 @@ public class Interface_map : MonoBehaviour {
     //生成地图
     private void GenerateMap()
     {
+        if (_MapMatrix == null) return;
+
         int rows = _MapMatrix.GetLength(0);
         int columns = _MapMatrix.GetLength(1);
         //生成地图格子
