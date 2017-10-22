@@ -13,8 +13,8 @@ public enum RPointType
 // 表示地图中的一个点
 public class RPoint
 {
-    public  Int64       locationX;  // x坐标
-    public  Int64       locationY;  // y坐标
+    public  Int64       locationX;  // 表现层使用的x坐标，用于存档，由表现层第一次展示这个点的时候产生
+    public  Int64       locationY;  // 表现层使用的y坐标，用于存档，由表现层第一次展示这个点的时候产生
     private String      name;       // 地图点名称
     private Int64       id;         // 地图点id
     private RPointType  type;       // 地图点类型
