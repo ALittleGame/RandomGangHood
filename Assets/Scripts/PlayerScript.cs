@@ -49,7 +49,8 @@ public class PlayerScript : MonoBehaviour {
 
     public bool SetTargetPosition(float x, float y)
     {
-        Vector2 _target = new Vector2(x, y);
+        
+        targetPosition = new Vector2(x, y);
 
         return true;
     }
