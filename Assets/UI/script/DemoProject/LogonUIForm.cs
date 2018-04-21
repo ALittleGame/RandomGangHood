@@ -19,6 +19,7 @@ public class LogonUIForm : BaseUIform {
         base.CurrentUIType.UIForm_LucenyTpy = UIFormLucenyTpye.Lucency; //透明度与穿透类型
         /* 给按钮注册事件 */
         RigisterButtonObjEvent("EnterGameBtn", OnEnterGameBtnClick);     
+        RigisterButtonObjEvent("JumpToEnterBtn", OnJumpBtnClick);
     }
 
     private void OnEnterGameBtnClick(GameObject go)
@@ -42,6 +43,12 @@ public class LogonUIForm : BaseUIform {
         {
             Debug.Log("error:找不到用户名密码的gameobj");
         }
+    }
+
+    private void OnJumpBtnClick(GameObject go)
+    {
+        OpenUI("SelectActor");
+        Debug.Log("辣鸡，真懒，记得下次输密码！");
     }
 
 }

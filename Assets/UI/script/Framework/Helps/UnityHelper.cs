@@ -48,7 +48,10 @@ public class UnityHelper : MonoBehaviour {
                 }
             }
         }
-
+        else
+        {
+            resObj = searchres.gameObject;
+        }
         return resObj;
     }
 
