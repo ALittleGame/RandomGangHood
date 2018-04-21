@@ -30,6 +30,28 @@ public class UnityHelper : MonoBehaviour {
         return searchres;
     }
 
+    public static GameObject FindTheChildNodeObj(GameObject Parent, string ChildNameStr)
+    {
+        GameObject resObj = null;
+        Transform searchres = null;
+
+        searchres = Parent.transform.Find(ChildNameStr);
+        if (searchres == null)
+        {
+            foreach (Transform trans in Parent.transform)
+            {
+                searchres = FindTheChildNode(trans.gameObject, ChildNameStr);
+                if (searchres != null)
+                {
+                    resObj = searchres.gameObject;
+                    return resObj;
+                }
+            }
+        }
+
+        return resObj;
+    }
+
     //获取子节点的脚本
     public static T GetTheChildNodeComponentScript<T>(GameObject Parent, string ChildNameStr) where T : Component
     {

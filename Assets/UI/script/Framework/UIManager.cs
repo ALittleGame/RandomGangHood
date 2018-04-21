@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour {
         _DicCurrentShowUIForms = new Dictionary<string, BaseUIform>();
         _DicFormsPaths = new Dictionary<string, string>();
         _StaCurrentShowUIForms = new Stack<BaseUIform>();
-        //初始化加载canvas（根ui窗体）预设
+        //初始化加载UIRoot（根ui窗体）预设
         InitRootCanvasLoading();
         //得到ui根节点、全屏节点、固定节点、弹出节点
         _TraCanvasTransform = GameObject.FindGameObjectWithTag(SysDefine.SYS_TAG_CANVAS).transform;
@@ -64,10 +64,11 @@ public class UIManager : MonoBehaviour {
         this.gameObject.transform.SetParent(_TraUIScripts, false);
         //“根ui窗体”在场景转换的时候，不允许销毁
         DontDestroyOnLoad(_TraCanvasTransform);
-        //初始化“ui窗体预设”路径数据
-        //InitUIFormsPathData();
+        //初始化“ui窗体预设”路径数据，
+        //InitUIFormsPathData();//此方法通過解析json文件獲取路徑，項目後期可以用，目前先在這寫死
         _DicFormsPaths.Add("LogonUIForm", "Prefabs\\LogonUIForm");
-        
+        _DicFormsPaths.Add("SelectActor", "Prefabs\\SelectActor");
+
     }
     /// <summary>
     /// 显示ui窗体
@@ -190,7 +191,7 @@ public class UIManager : MonoBehaviour {
     /// <returns></returns>
     private BaseUIform LoadFormsToUIFormsCatch(string uiFormsName)
     {
-        BaseUIform baseUIFormResult = null;                 //加载的反悔ui窗体基类
+        BaseUIform baseUIFormResult = null;                 //加载的返回ui窗体基类
 
         _DicALLUIForms.TryGetValue(uiFormsName, out baseUIFormResult);
         if(baseUIFormResult == null)
